@@ -31,7 +31,7 @@ function App() {
   // FORM FUNCTIONS
   function handleOnChange(event){
     setFormData({
-      ...formData, [event.target.name] :event.target.value
+      ...formData, [event.target.name] : event.target.value
     })
   }
 
@@ -65,6 +65,7 @@ function App() {
       </div>
       <ToyContainer 
         toys={toys}
+        setToys={setToys}
       />
     </>
   );
