@@ -7,9 +7,7 @@ function ToyContainer({toys}) {
       {/* Render the collection of ToyCards */}
       {
         toys.map((toy) => {
-          return  <ToyCard
-            toy={toy}
-          />
+          return  <ToyCard key={toy.id} toy={toy}/>
         })
       }
 
