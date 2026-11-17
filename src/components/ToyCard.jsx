@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 
 function ToyCard({toy, setToys}) {
 
@@ -17,6 +18,31 @@ function handleDelete(){
   })
 }
 
+const [like, setLike] = useState(toy.likes)
+
+function handleUpdate(){
+  const updatedLikes = like + 1;
+  setLike(updatedLikes)
+
+  fetch(`http://localhost:4000/toys/${toy.id}`, {
+    method:"PATCH",
+    headers:{
+      "Content-Type": "application/json"
+    }, 
+    body:JSON.stringify(
+      {
+        "likes" : updatedLikes
+      }
+    )
+  })
+  .then(res => res.json())
+  .then(data =>{
+       console.log(data);
+       
+  })
+ 
+}
+
   return (
     <div className="card" data-testid="toy-card">
       <h2>{toy.name}</h2>
@@ -25,8 +51,8 @@ function handleDelete(){
         alt={toy.name}
         className="toy-avatar"
       />
-      <p>{toy.likes} Likes </p>
-      <button className="like-btn">Like {"<3"}</button>
+      <p>{like} Likes </p>
+      <button className="like-btn" onClick={handleUpdate}>Like {"<3"}</button>
       <button className="del-btn" onClick={handleDelete}>Donate to GoodWill</button>
     </div>
   );
